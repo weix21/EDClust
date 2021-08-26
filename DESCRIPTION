@@ -1,0 +1,15 @@
+Package: EDClust
+Type: Package
+Title: Single-cell Clustering
+Version: 0.1.0
+Author: Xin Wei
+Maintainer: Xin Wei <xin.wei@emory.edu>
+Description: A tool for unsupervised clustering 
+    in population-level single cell RNA-Seq data.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    JuliaCall,
+    SHARP
+RoxygenNote: 7.1.1
