@@ -53,6 +53,19 @@ which provides an R interface to Julia.
 
 ## Quick start
 
+Here we show the key steps for paramter initalization and clustering.
+This code chunk assumes you have an pre-processed expression count matrix called count_all_notna, an array of subject ID information called subject_all_notna.
+
+Here's we show an example in dataset step by step
+
+###(1) Setup the package 
+
+```{r quick_start, eval = FALSE}
+library(EDClust)
+julia <- setup_julia()
+## You can use `Julia` at a specific location by
+## julia <- setup_julia(path = "the folder that contains Julia binary") 
+```
 
 
 
