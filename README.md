@@ -12,7 +12,7 @@ Based on an EM and MM hybrid framework,
 estimating parameters of effects from different sources,
 and posterior probabilities for cells being in each cluster.  
 
-![image](https://github.com/weix21/EDClust/blob/main/vignettes/flowchart(github2).jpg)
+![image](https://github.com/weix21/EDClust/blob/main/vignettes/flowchart.jpg)
   
 In this readme file, we briefly present how to install `EDClust` package through GitHub and the basic functionalities. 
 One might need pre-install dependent R packages such as JuliaCall, SAHRP, and mclust.
