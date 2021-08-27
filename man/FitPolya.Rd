@@ -34,8 +34,8 @@ EDClust returns a list object containing:
   \item mem: an array of clustering label
   \item loglik: the final log likelihood after iterations
   \item alpha_0: a matrix of cell-type specific effects estimates
-  \item delta: a list of subject-type specific effects estimates
-  \item alpha: a list of overall effects estimates
+  \item delta: a three dimensions matrix of subject-type specific effects estimates
+  \item alpha: a three dimensions matrix of overall effects estimates
   \item p: a matrix with probability that each cell belongs to each cluster
 }
 }
