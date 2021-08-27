@@ -27,7 +27,7 @@ homepage at https://github.com/weix21/EDClust/issues.
 
 ```{r install, message=FALSE, warning=FALSE}
 library(devtools)
-install_github("weix21/EDClust", dependencies=T)
+install_github("weix21/EDClust")
 library(EDClust)
 ```
 ### Install Julia
