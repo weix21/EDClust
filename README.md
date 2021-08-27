@@ -34,13 +34,13 @@ julia <- setup_julia()
 
 which will automatically install both Julia and the required Julia packages if they are missing. 
 
-If you want to use an existing Julia binary, make sure that julia is found in the path. Then you can do 
+If you want to setup Julia manually, you can download a generic binary from https://julialang.org/downloads/. 
+Before using an existing Julia binary, make sure that julia is found in the path. Then you can do 
 
 ```{r install, message=FALSE, warning=FALSE}
 julia <- setup_julia(path = "the folder that contains Julia binary") 
 ```
 
-To setup Julia manually, you can download a generic binary from https://julialang.org/downloads/. 
 For more information about Julia setup, 
 please see the julia_setup() function from [JuliaCall](https://github.com/Non-Contradiction/JuliaCall) package, 
 which provides an R interface to Julia.
