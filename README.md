@@ -58,7 +58,7 @@ This code chunk assumes you have an pre-processed expression count matrix called
 
 Here's we show an example in dataset step by step
 
-###(1) Setup the package 
+### (1) Setup the package 
 
 ```{r quick_start, eval = FALSE}
 library(EDClust)
