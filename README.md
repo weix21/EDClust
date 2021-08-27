@@ -13,7 +13,10 @@ and posterior probabilities for cells being in each cluster.
   
 One might need pre-install dependent R packages such as JuliaCall, SAHRP, and mclust.
 
+In this readme file, we briefly present how to install `EDClust` package through GitHub and the basic functionalities. 
 All the copyrights are explained by Xin Wei [xwei44@emory.edu](xwei44@emory.edu) from [Dr. Wu's lab](http://www.haowulab.org/). 
+Any EDClust-related questions should be posted to the GitHub Issue section of `EDClust`
+homepage at https://github.com/weix21/EDClust/issues.
 
 ## Installation
 
@@ -44,6 +47,8 @@ julia <- setup_julia(path = "the folder that contains Julia binary")
 For more information about Julia setup, 
 please see the julia_setup() function from [JuliaCall](https://github.com/Non-Contradiction/JuliaCall) package, 
 which provides an R interface to Julia.
+
+## Quick start
 
 
 
