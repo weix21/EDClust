@@ -56,7 +56,7 @@ which provides an R interface to Julia.
 Here we show the key steps for paramter initalization and clustering.
 This code chunk assumes you have an pre-processed expression count matrix called count_all_notna, an array of subject ID information called subject_all_notna.
 
-Here's we show an example in dataset step by step
+Here's we show an example in Mlung_sub Dataset step by step.
 
 ### (1) Setup the package 
 
@@ -69,15 +69,16 @@ julia <- setup_julia()
 
 ### (2) Initialize parameters
 
-EM algorithm often suffers from locally optimal solutions. 
-Our method, due to the high dimensionality and complex nature of the data, is particularly prone to such challenges. 
-Thus, it is crucial to provide good initial values for the parameter estimations, especially α0 and δ. 
-
 ```{r quick_start, eval = FALSE}
-load()
+data("Mlung_sub")
+alpha_0 <- InitVal_S(count_all_notna, subject_all_notna, Ncluster = 6, ID = 1) 
 ```
 
+### (3) Clustering
 
+```{r quick_start, eval = FALSE}
+result <- FitPolya(count_all_notna, subject_all_notna, alpha_0)
+```
 
 
 
