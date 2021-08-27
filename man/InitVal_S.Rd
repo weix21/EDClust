@@ -4,7 +4,13 @@
 \alias{InitVal_S}
 \title{Run SHARP for initial value}
 \usage{
-InitVal_S(count_all_notna, subject_all_notna, Ncluster = NULL, ID = 1)
+InitVal_S(
+  count_all_notna,
+  subject_all_notna,
+  Ncluster = NULL,
+  ID = 1,
+  seed = 1234
+)
 }
 \arguments{
 \item{count_all_notna}{a count expression matrix.}
@@ -14,6 +20,8 @@ InitVal_S(count_all_notna, subject_all_notna, Ncluster = NULL, ID = 1)
 \item{Ncluster}{number of clusters for the final clustering results.}
 
 \item{ID}{baseline subject ID number.}
+
+\item{seed}{a number used for setting seeds for SHARP to obtain reproducible results.}
 }
 \value{
 An array containing the initial value of cell-type effect based on baseline subject.

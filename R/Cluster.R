@@ -80,6 +80,7 @@ InitVal <- function(Y, celltype, subjectid) {
 #' @param subject_all_notna a subject ID array.
 #' @param Ncluster number of clusters for the final clustering results.
 #' @param ID baseline subject ID number.
+#' @param seed a number used for setting seeds for SHARP to obtain reproducible results.
 #'
 #' @return An array containing the initial value of cell-type effect based on baseline subject.
 #' @export
@@ -92,14 +93,14 @@ InitVal <- function(Y, celltype, subjectid) {
 #' alpha_0 <- InitVal_S(count_all_notna, subject_all_notna, Ncluster = 5, ID = 3)
 #'
 #'
-InitVal_S <- function(count_all_notna, subject_all_notna, Ncluster = NULL, ID = 1) {
+InitVal_S <- function(count_all_notna, subject_all_notna, Ncluster = NULL, ID = 1, seed = 1234) {
   count <- count_all_notna[, which(subject_all_notna == levels(factor(subject_all_notna))[ID])]
   subjectid <- subject_all_notna[which(subject_all_notna == levels(factor(subject_all_notna))[ID])]
 
   data <- NormalizeSC(count)
   data <- log2(data$normdata + 1)
 
-  SLabel <- SHARP(data, N.cluster = Ncluster)
+  SLabel <- SHARP(data, N.cluster = Ncluster, rN.seed=seed)
 
   alpha_0 <- InitVal(count, SLabel$pred_clusters, subjectid)$alpha[[1]]
   return(alpha_0)
