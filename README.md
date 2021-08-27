@@ -7,7 +7,7 @@ to achieve a reasonable computational performance of clustering directly in R.
 `EDClust` adopts a Dirichlet-multinomial mixture model 
 and explicitly accounts for cell type heterogeneity, subject heterogeneity, and clustering uncertainty. 
 EDClust pipeline includes three steps: (A). input data. (B). initilaze parameters. (C). clustering.
-Based on a rigorous staitstical framework, 
+Based on an EM and MM hybrid framework, 
 `EDClust` offers functions for predicting cell type labels,
 estimating parameters of effects from different sources,
 and posterior probabilities for cells being in each cluster.  
@@ -67,6 +67,15 @@ julia <- setup_julia()
 ## julia <- setup_julia(path = "the folder that contains Julia binary") 
 ```
 
+### (2) Initialize parameters
+
+EM algorithm often suffers from locally optimal solutions. 
+Our method, due to the high dimensionality and complex nature of the data, is particularly prone to such challenges. 
+Thus, it is crucial to provide good initial values for the parameter estimations, especially α0 and δ. 
+
+```{r quick_start, eval = FALSE}
+load()
+```
 
 
 
