@@ -6,14 +6,17 @@ to achieve a reasonable computational performance of clustering directly in R.
   
 `EDClust` adopts a Dirichlet-multinomial mixture model 
 and explicitly accounts for cell type heterogeneity, subject heterogeneity, and clustering uncertainty. 
+EDClust pipeline includes three steps: (A). input data. (B). initilaze parameters. (C). clustering.
 Based on a rigorous staitstical framework, 
 `EDClust` offers functions for predicting cell type labels,
 estimating parameters of effects from different sources,
 and posterior probabilities for cells being in each cluster.  
+
+![image](https://github.com/weix21/EDClust/blob/main/vignettes/flowchart(github).jpg)
   
+In this readme file, we briefly present how to install `EDClust` package through GitHub and the basic functionalities. 
 One might need pre-install dependent R packages such as JuliaCall, SAHRP, and mclust.
 
-In this readme file, we briefly present how to install `EDClust` package through GitHub and the basic functionalities. 
 All the copyrights are explained by Xin Wei [xwei44@emory.edu](xwei44@emory.edu) from [Dr. Wu's lab](http://www.haowulab.org/). 
 Any EDClust-related questions should be posted to the GitHub Issue section of `EDClust`
 homepage at https://github.com/weix21/EDClust/issues.
@@ -50,7 +53,9 @@ which provides an R interface to Julia.
 
 ## Quick start
 
-![image](https://github.com/weix21/EDClust/blob/main/vignettes/flowchart(github).jpg)
+
+
+
 
 
 
