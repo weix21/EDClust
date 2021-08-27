@@ -50,7 +50,7 @@ which provides an R interface to Julia.
 
 ## Quick start
 
-![image](https://github.com/weix21/EDClust/blob/main/vignettes/flowchart(github).jpeg)
+![image](https://github.com/weix21/EDClust/blob/main/vignettes/flowchart(github).jpg)
 
 
 
