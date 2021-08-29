@@ -1,0 +1,69 @@
+---
+title: "introduction"
+#output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{The EDClust User's Guide}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+output:
+  BiocStyle::html_document:
+    toc_float: FALSE
+---
+
+
+\tableofContents
+
+# Introduction
+
+High-throughput technologies have revolutionized 
+the genomics research.  The early
+applications of the technologies were largely on 
+cell lines. However, there is an increasing number 
+of larger-scale, population level clinical studies 
+in recent years, hoping to identify diagnostic 
+biomarkers and therapeutic targets.  The samples 
+collected in these studies, such as blood, tumor, 
+or brain tissue, are mixtures of a number of different
+cell types.  The sample mixing complicates data analysis
+because the experimental data from the high-throughput 
+experiments are weighted averages of signals from multiple
+cell types. For these data, traditional analysis methods that ignores
+the cell mixture 
+will lead to results with low resolution,  biased, or
+even errorneous results. 
+For example, it has been discovered that in epigenome-wide 
+association studies (EWAS), the mixing proportions 
+can be confounded with the experimental factor of 
+interest (such as age). Ignoring the cell mixing 
+will lead to  false positives. 
+On the other hand, cell type specific changes 
+under different conditions could be associated
+with disease pathogenesis and progressions, which are of
+great interests to researchers.
+
+For heterogeneous samples, it is possible to profile the
+pure cell types through experimental techniques.
+They are, however, laborious and expensive that cannot
+be applied to large scale studies.
+Computational tools for analzying the mixed data have been developed 
+for proportion estimation and cell type 
+specific signal detection. 
+<!-- deconvolution of signals and detection of signals.  -->
+<!-- Without the experimental tools,  -->
+There are two fundamental questions in this type of analyses: 
+<!-- that are  for conducting in-silico 
+deconvolution of signals and detection of signals.  -->
+
+1. How to estimate mixing proportions?  
+
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(EDClust)
+```
