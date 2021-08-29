@@ -17,7 +17,7 @@ and posterior probabilities for cells being in each cluster.
 In this readme file, we briefly present how to install `EDClust` package through GitHub and the basic functionalities. 
 One might need pre-install dependent R packages such as JuliaCall, SAHRP, and mclust.
 
-All the copyrights are explained by Xin Wei [xwei44@emory.edu](xwei44@emory.edu) from [Dr. Wu's lab](http://www.haowulab.org/). 
+All the copyrights are explained by Xin Wei <xwei44@emory.edu> from [Dr. Wu's lab](http://www.haowulab.org/). 
 Any EDClust-related questions should be posted to the GitHub Issue section of `EDClust`
 homepage at https://github.com/weix21/EDClust/issues.
 
