@@ -14,5 +14,7 @@ Imports:
     SHARP
 Suggests: 
     rmarkdown,
-    mclust
+    mclust,
+    knitr
 RoxygenNote: 7.1.1
+VignetteBuilder: knitr
