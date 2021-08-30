@@ -12,7 +12,7 @@ Based on an EM and MM hybrid framework,
 estimating parameters of effects from different sources,
 and posterior probabilities for cells being in each cluster.  
 
-![image](https://github.com/weix21/EDClust/blob/main/vignettes/flowchart.jpg)
+![image](https://github.com/weix21/EDClust/blob/main/figures/flowchart.jpg)
   
 In this readme file, we briefly present how to install `EDClust` package through GitHub and the basic functionalities. 
 One might need pre-install dependent R packages such as JuliaCall, SAHRP, and mclust.
@@ -71,7 +71,7 @@ julia <- setup_julia()
 
 ```{r quick_start, eval = FALSE}
 data("Mlung_sub")
-alpha_0 <- InitVal_S(count_all_notna, subject_all_notna, Ncluster = 6, ID = 1) 
+alpha_0 <- InitVal_S(count_all_notna, subject_all_notna, Ncluster = 6, ID = 2, seed = 2345) 
 ```
 
 ### (3) Clustering
@@ -82,6 +82,8 @@ result <- FitPolya(count_all_notna, subject_all_notna, alpha_0)
 library(mclust)
 adjustedRandIndex(result$mem, annot_all_notna)
 ```
+
+![image](https://github.com/weix21/EDClust/blob/main/figures/TSNE.jpg)
 
 
 
