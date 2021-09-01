@@ -85,7 +85,7 @@ adjustedRandIndex(result$mem, annot_all_notna)
 
 Based on the clustering result, The t-SNE plot can be shown as: 
 
-![image](https://github.com/weix21/EDClust/blob/main/vignettes/TSNE2.jpg)
+![image](https://github.com/weix21/EDClust/blob/main/figures/TSNE.jpg)
 
 
 
