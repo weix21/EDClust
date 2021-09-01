@@ -6,7 +6,7 @@ to achieve a reasonable computational performance of clustering directly in R.
   
 `EDClust` adopts a Dirichlet-multinomial mixture model 
 and explicitly accounts for cell type heterogeneity, subject heterogeneity, and clustering uncertainty. 
-EDClust pipeline includes three steps: (A). input data. (B). initilaze parameters. (C). clustering.
+EDClust pipeline includes three steps: (A). input data. (B). initialize parameters. (C). clustering.
 Based on an EM and MM hybrid framework, 
 `EDClust` offers functions for predicting cell type labels,
 estimating parameters of effects from different sources,
@@ -85,7 +85,9 @@ adjustedRandIndex(result$mem, annot_all_notna)
 
 Based on the clustering result, The t-SNE plot can be shown as: 
 
-![image](https://github.com/weix21/EDClust/blob/main/figures/TSNE.jpg)
+![image](https://github.com/weix21/EDClust/blob/main/vignettes/TSNE2.jpg)
+
+
 
 
 
