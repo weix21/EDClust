@@ -87,7 +87,11 @@ Based on the clustering result, The t-SNE plot can be shown as:
 
 ![image](https://github.com/weix21/EDClust/blob/main/vignettes/TSNE.jpg)
 
+# For detailed usage of EDClust, please refer to the vignette file through
 
+```{r vignettes, eval = FALSE}
+vignette("EDClust")
+```
 
 
 
