@@ -41,7 +41,7 @@ julia <- setup_julia()
 which will automatically install both Julia and the required Julia packages if they are missing. 
 
 If you want to setup Julia manually, you can download a generic binary from https://julialang.org/downloads/. 
-Before using an existing Julia binary, make sure that julia is found in the path. Then you can do 
+Before using an existing Julia binary, make sure that Julia is found in the path. Then you can do 
 
 ```{r install, message=FALSE, warning=FALSE}
 julia <- setup_julia(path = "the folder that contains Julia binary") 
@@ -53,7 +53,7 @@ which provides an R interface to Julia.
 
 ## Quick start
 
-Here we show the key steps for paramter initalization and clustering.
+Here we show the key steps for parameter initalization and clustering.
 This code chunk assumes you have an pre-processed expression count matrix called count_all_notna, an array of subject ID information called subject_all_notna.
 
 Here's we show an example in Mlung_sub Dataset step by step.
