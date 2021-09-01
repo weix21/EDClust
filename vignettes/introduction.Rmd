@@ -41,6 +41,24 @@ knitr::opts_chunk$set(
 )
 ```
 
+# Introduction
+
+Single-cell RNA sequencing (scRNA-seq) has revolutionized biological research by 
+enabling the measurement of transcriptomic profiles at the single-cell level. 
+Appropriately clustering cells on scRNA-seq data with multiple subjects could be
+a problem in larger scale studies.
+Subject-specific variation is the most challenging one.
+It could have a significant impact on clustering accuracy when
+systematic heterogeneity from multiple subjects exists. 
+Though there are several methods seeking to address such effects 
+most of them suffer from several limitations.
+
+EDClust is designed for multi-subject scRNA-seq cell clustering.
+EDClust adopts a Dirichlet-multinomial mixture model and explicitly accounts for cell type heterogeneity, 
+subject heterogeneity, and clustering uncertainty. 
+EDClust pipeline mainly includes three steps: (A). input data. (B). initialize parameters. (C). clustering. 
+Based on an EM and MM hybrid framework, EDClust offers functions for predicting cell type labels, 
+estimating parameters of effects from different sources, and posterior probabilities for cells being in each cluster.
 
 ```{r, flowchart, echo=FALSE}
 library(knitr)
@@ -125,38 +143,39 @@ as the unsupervised clustering method because of its good computational performa
 Using function `InitVal_S()` will automatically run SHARP and compute the initial value for $\alpha_0$.
 You could specify the number of clusters, baseline subject and seed for SHARP.
 
-```{r initialization, eval = FALSE}
+```{r initialization, eval = TRUE, message=FALSE, results='hide', include = TRUE}
 alpha_0 <- InitVal_S(count_all_notna, subject_all_notna, Ncluster = 6, ID = 2, seed = 2345) 
 ```
 
+It is noted that EDClust is not limited to `SHARP`.
 You could also use function `InitVal()` to 
 compute the initial values based on clustering results obtained from other methods. 
 
 ## Clustering
 
-After computing the initial values, 
+After computing the initial values, we can use function `FitPolya()` for clustering. 
+The results provides predicted cell label (`mem`); the log likelihood (`loglik`); 
+estimations of cell-type specific effects (`alpha_0`), subject-type specific effects (`delta`) as well as overall effect (`alpha`);
+and the probability that each cell belongs to each cluster (`p`).
 
-```{r clustering, eval = FALSE}
+```{r clustering, eval = TRUE, message=FALSE, results='hide', include = TRUE}
 result <- FitPolya(count_all_notna, subject_all_notna, alpha_0)
 ```
 
-Based on the clustering result, we can benchmark the performance of EDClust with ARI. And The t-SNE plot can be shown as: 
+Based on the clustering results, we can benchmark the performance of EDClust by ARI. 
+And The t-SNE plot can also be shown as: 
 
-```{r ARI, eval = FALSE}
+```{r ARI, eval = TRUE, message=FALSE, results='hide', include = TRUE}
 library(mclust)
 adjustedRandIndex(result$mem, annot_all_notna)
 ```
 
-
-
 ```{r, TSNE, echo = FALSE}
-include_graphics("TSNE2.jpg")
+include_graphics("TSNE.jpg")
 ```
 
 # Session Info
 ```{r}
 sessionInfo()
 ```
-
-
 
