@@ -53,7 +53,7 @@ which provides an R interface to Julia.
 
 ## Quick start
 
-Here we show the key steps for parameter initalization and clustering.
+Here we show the key steps for parameter initialization and clustering.
 This code chunk assumes you have an pre-processed expression count matrix called count_all_notna, an array of subject ID information called subject_all_notna.
 
 Here's we show an example in Mlung_sub Dataset step by step.
