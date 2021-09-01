@@ -87,6 +87,17 @@ Based on the clustering result, The t-SNE plot can be shown as:
 
 ![image](https://github.com/weix21/EDClust/blob/main/vignettes/TSNE.jpg)
 
+### For detailed usage of EDClust, please refer to the vignette file through
+
+```{r vignettes, eval = FALSE}
+vignette("EDClust")
+## You might need to use
+## install_github("weix21/EDClust", build_vignettes = TRUE)
+## to build vignettes, which could be time consuming and may require additional packages.
+```
+
+The content in this README file is essentially the same as the package vignette.
+
 
 
 
