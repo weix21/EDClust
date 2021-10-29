@@ -117,7 +117,7 @@ InitVal_S <- function(count_all_notna, subject_all_notna, Ncluster = NULL, ID = 
 #' @param EM_steps the maximum number of EM iterations. By default, EM_steps = 100, i.e.,
 #' EDClust() will stop and return clustering results when EM_steps = 100.
 #' @param MM_steps the maximum number of MM iterations within the M-step in each EM iteration. By default, MM_steps = 3.
-#' @param BaseID the baseline ID used in generating alpha_0. If there's only one sample, you can set BaseID as 0.
+#' @param BaseID same as the ID used in generating alpha_0. If there's only one sample, you should use the default setting: 0L.
 #' @param flag the stopping_criterion of EDClust. By default, flag = 3.
 #'
 #' @return EDClust returns a list object containing:
@@ -137,10 +137,10 @@ InitVal_S <- function(count_all_notna, subject_all_notna, Ncluster = NULL, ID = 
 #' EMMM_Result <- FitPolya(count_all_notna, subject_all_notna, alpha_0)
 #'
 #' EMMM_Result <- FitPolya(count_all_notna, subject_all_notna, alpha_0,
-#'                         EM_steps = 20L, MM_steps = 5L, BaseID = 1, flag = 1e-05)
+#'                         EM_steps = 20L, MM_steps = 5L, BaseID = 2L, flag = 1e-05)
 #'
 #'
-FitPolya <- function(count_all_notna, subject_all_notna, alpha_0, EM_steps = 100L, MM_steps = 3L, BaseID = 0, flag = 1e-04) {
+FitPolya <- function(count_all_notna, subject_all_notna, alpha_0, EM_steps = 100L, MM_steps = 3L, BaseID = 0L, flag = 1e-04) {
   EMMM_Result <- julia$call("fitPolya", count_all_notna, subject_all_notna, alpha_0, EM_steps, MM_steps, BaseID, flag)
   names(EMMM_Result) <- c("mem", "loglik", "alpha_0", "delta", "alpha", "p")
   return(EMMM_Result)
