@@ -77,7 +77,7 @@ alpha_0 <- InitVal_S(count_all_notna, subject_all_notna, Ncluster = 6, ID = 2, s
 ### (3) Clustering
 
 ```{r quick_start, eval = FALSE}
-result <- FitPolya(count_all_notna, subject_all_notna, alpha_0)
+result <- FitPolya(count_all_notna, subject_all_notna, alpha_0, BaseID=2L)
 
 library(mclust)
 adjustedRandIndex(result$mem, annot_all_notna)
