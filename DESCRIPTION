@@ -1,7 +1,7 @@
 Package: EDClust
 Type: Package
 Title: Single-cell Clustering
-Version: 0.1.2
+Version: 0.1.3
 Author: Xin Wei
 Maintainer: Xin Wei <xin.wei@emory.edu>
 Description: A tool for unsupervised clustering 
@@ -16,5 +16,5 @@ Suggests:
     rmarkdown,
     mclust,
     knitr
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 VignetteBuilder: knitr

@@ -10,6 +10,7 @@ FitPolya(
   alpha_0,
   EM_steps = 100L,
   MM_steps = 3L,
+  BaseID = 0,
   flag = 1e-04
 )
 }
@@ -24,6 +25,8 @@ FitPolya(
 EDClust() will stop and return clustering results when EM_steps = 100.}
 
 \item{MM_steps}{the maximum number of MM iterations within the M-step in each EM iteration. By default, MM_steps = 3.}
+
+\item{BaseID}{the baseline ID used in generating alpha_0. If there's only one sample, you can set BaseID as 0.}
 
 \item{flag}{the stopping_criterion of EDClust. By default, flag = 3.}
 }
@@ -47,7 +50,7 @@ EDClust: An EM-MM hybrid method for cell clustering in multiple-subject single-c
 EMMM_Result <- FitPolya(count_all_notna, subject_all_notna, alpha_0)
 
 EMMM_Result <- FitPolya(count_all_notna, subject_all_notna, alpha_0,
-                        EM_steps = 20L, MM_steps = 5L, flag = 1e-05)
+                        EM_steps = 20L, MM_steps = 5L, BaseID = 1, flag = 1e-05)
 
 
 }
