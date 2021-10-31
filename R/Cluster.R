@@ -117,7 +117,7 @@ InitVal_S <- function(count_all_notna, subject_all_notna, Ncluster = NULL, ID = 
 #' @param EM_steps the maximum number of EM iterations. By default, EM_steps = 100, i.e.,
 #' EDClust() will stop and return clustering results when EM_steps = 100.
 #' @param MM_steps the maximum number of MM iterations within the M-step in each EM iteration. By default, MM_steps = 3.
-#' @param BaseID same as the ID used in generating alpha_0. If there's only one sample, you should use the default setting: 0L.
+#' @param BaseID is same as the ID used in generating alpha_0. If there's only one sample, you should use the default setting: 0L.
 #' @param flag the stopping_criterion of EDClust. By default, flag = 3.
 #'
 #' @return EDClust returns a list object containing:
