@@ -30,7 +30,7 @@ setup_julia <- function(path = NA) {
   julia$install_package_if_needed("Distributions")
   julia$install_package_if_needed("SpecialFunctions")
   julia$install_package_if_needed("StatsBase")
-  if (julia$installed_package("EDClust") == "nothing") {
+  if (julia$installed_package("EDClust") !="0.1.1") {
     julia_install_package("https://github.com/weix21/EDClust.jl.git")
   }
   julia$library("EDClust")
