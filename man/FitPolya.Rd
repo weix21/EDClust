@@ -26,7 +26,7 @@ EDClust() will stop and return clustering results when EM_steps = 100.}
 
 \item{MM_steps}{the maximum number of MM iterations within the M-step in each EM iteration. By default, MM_steps = 3.}
 
-\item{BaseID}{same as the ID used in generating alpha_0. If there's only one sample, you should use the default setting: 0L.}
+\item{BaseID}{is same as the ID used in generating alpha_0. If there's only one sample, you should use the default setting: 0L.}
 
 \item{flag}{the stopping_criterion of EDClust. By default, flag = 3.}
 }
