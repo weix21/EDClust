@@ -51,6 +51,12 @@ For more information about Julia setup,
 please see the julia_setup() function from [JuliaCall](https://github.com/Non-Contradiction/JuliaCall) package, 
 which provides an R interface to Julia.
 
+If you plan to update `EDClust` to newest version, after updating, please also specify `Update = TRUE` to update the related `EDClust` Julia package version.
+
+```{r updatejulia, eval = FALSE}
+julia <- setup_julia(Update = TRUE) 
+```
+
 ## Quick start
 
 Here we show the key steps for parameter initialization and clustering.
