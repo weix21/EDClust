@@ -102,7 +102,7 @@ InitVal_S <- function(count_all_notna, subject_all_notna, Ncluster = NULL, ID = 
 
   SLabel <- SHARP(data, N.cluster = Ncluster, rN.seed=seed)
 
-  alpha_0 <- InitVal(count, SLabel$pred_clusters, subjectid)$alpha[[1]]
+  invisible(capture.output(alpha_0 <- InitVal(count, SLabel$pred_clusters, subjectid)$alpha[[1]]))
   return(alpha_0)
 }
 
