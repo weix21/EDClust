@@ -4,10 +4,12 @@
 \alias{setup_julia}
 \title{Set up Julia}
 \usage{
-setup_julia(path = NA)
+setup_julia(path = NA, Update = FALSE)
 }
 \arguments{
 \item{path}{path of Julia}
+
+\item{Update}{specify whether to update EDClust's Julia package. It is recommended to set it as TRUE when EDClust is updated.}
 }
 \value{
 The Julia interface, which is an environment with the necessary methods provided by JuliaCall
