@@ -100,9 +100,9 @@ InitVal_S <- function(count_all_notna, subject_all_notna, Ncluster = NULL, ID = 
   data <- NormalizeSC(count)
   data <- log2(data$normdata + 1)
 
-  SLabel <- SHARP(data, N.cluster = Ncluster, rN.seed=seed)
+  invisible(capture.output(SLabel <- SHARP(data, N.cluster = Ncluster, rN.seed=seed)))
 
-  invisible(capture.output(alpha_0 <- InitVal(count, SLabel$pred_clusters, subjectid)$alpha[[1]]))
+  alpha_0 <- InitVal(count, SLabel$pred_clusters, subjectid)$alpha[[1]]
   return(alpha_0)
 }
 
