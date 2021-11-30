@@ -100,11 +100,72 @@ InitVal_S <- function(count_all_notna, subject_all_notna, Ncluster = NULL, ID = 
   data <- NormalizeSC(count)
   data <- log2(data$normdata + 1)
 
-  invisible(capture.output(SLabel <- SHARP(data, N.cluster = Ncluster, rN.seed=seed)))
+  invisible(capture.output(SLabel <- SHARP(data, N.cluster = Ncluster, rN.seed = seed)))
 
   alpha_0 <- InitVal(count, SLabel$pred_clusters, subjectid)$alpha[[1]]
   return(alpha_0)
 }
+
+#' Run Liger for initial cluster
+#'
+#' @param countlist a list containing a count expression matrix.
+#' @param Ncluster number of clusters for the final clustering results.
+#' @param seed a number used for setting seeds for SHARP to obtain reproducible results.
+#'
+#' @return An array contains the initial cluster based on Liger, which is used for InitVal_L().
+#' @import rliger
+#'
+#' @examples
+#'
+#' liger_clusters <- Run_Liger(count_all_notna, Ncluster = 5)
+#'
+#' liger_clusters <- Run_Liger(count_all_notna, Ncluster = 5, seed = 2345)
+#'
+#'
+Run_Liger <- function(countlist, Ncluster, seed = 1234) {
+ 
+  ifnb_liger <- createLiger(countlist)
+  ifnb_liger <- normalize(ifnb_liger)
+  ifnb_liger <- selectGenes(ifnb_liger)
+  ifnb_liger <- scaleNotCenter(ifnb_liger)
+  ifnb_liger <- optimizeALS(ifnb_liger, k = Ncluster, rand.seed = seed)
+  ifnb_liger <- quantile_norm(ifnb_liger, rand.seed = seed)
+  liger_clusters <- ifnb_liger@clusters
+
+  return(liger_clusters)
+}
+
+#' Run Liger for initial value
+#'
+#' @param count_all_notna a count expression matrix.
+#' @param subject_all_notna a subject ID array.
+#' @param Ncluster number of clusters for the final clustering results.
+#' @param ID baseline subject ID number.
+#' @param seed a number used for setting seeds for SHARP to obtain reproducible results.
+#'
+#' @return An array containing the initial value of cell-type effect based on baseline subject.
+#' @export
+#' @import rliger
+#'
+#' @examples
+#'
+#' alpha_0 <- InitVal_L(count_all_notna, subject_all_notna, Ncluster = 5)
+#'
+#' alpha_0 <- InitVal_L(count_all_notna, subject_all_notna, Ncluster = 5, ID = 3, seed = 2345)
+#'
+#'
+InitVal_L <- function(count_all_notna, subject_all_notna, Ncluster, ID = 1, seed = 1234) {
+  countlist <- list()
+  countlist[[1]] <- count_all_notna[, which(subject_all_notna == levels(factor(subject_all_notna))[ID])]
+  subjectid <- subject_all_notna[which(subject_all_notna == levels(factor(subject_all_notna))[ID])]
+  names(countlist) <- 1
+  
+  invisible(capture.output(liger_clusters <- Run_Liger(countlist, Ncluster, seed)))
+  
+  alpha_0 <- InitVal(countlist[[1]], liger_clusters, subjectid)$alpha[[1]]
+  return(alpha_0)
+}
+
 
 
 #' Run EDClust for single-cell RNA data clustering
