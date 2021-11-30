@@ -156,13 +156,18 @@ Run_Liger <- function(countlist, Ncluster, seed = 1234) {
 #'
 InitVal_L <- function(count_all_notna, subject_all_notna, Ncluster, ID = 1, seed = 1234) {
   countlist <- list()
-  countlist[[1]] <- count_all_notna[, which(subject_all_notna == levels(factor(subject_all_notna))[ID])]
+  NSubject <- length(unique(subject_all_notna))
+  for(i in 1:NSubject) {
+    countlist[[i]] <- count_all_notna[, which(subject_all_notna == levels(factor(subject_all_notna))[i])]
+  }
   subjectid <- subject_all_notna[which(subject_all_notna == levels(factor(subject_all_notna))[ID])]
-  names(countlist) <- 1
+  names(countlist) <- 1:NSubject
   
   invisible(capture.output(liger_clusters <- Run_Liger(countlist, Ncluster, seed)))
   
-  alpha_0 <- InitVal(countlist[[1]], liger_clusters, subjectid)$alpha[[1]]
+  liger_clusters <- liger_clusters[which(subject_all_notna == levels(factor(subject_all_notna))[ID])]
+  
+  alpha_0 <- InitVal(countlist[[ID]], liger_clusters, subjectid)$alpha[[1]]
   return(alpha_0)
 }
 
