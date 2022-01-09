@@ -212,8 +212,8 @@ InitVal_S <- function(count_all_notna, subject_all_notna, Ncluster = NULL, ID = 
 #' @return \itemize{
 #'   \item mem: an array of clustering label
 #'   \item loglik: the final log likelihood after iterations
-#'   \item alpha_0: a matrix of cell-type specific effects estimates
-#'   \item delta: a three dimensions matrix of subject-type specific effects estimates
+#'   \item alpha_0: a matrix of cell type-specific effects estimates
+#'   \item delta: a three dimensions matrix of subject-specific effects estimates
 #'   \item alpha: a three dimensions matrix of overall effects estimates
 #'   \item p: a matrix with probability that each cell belongs to each cluster
 #' }
