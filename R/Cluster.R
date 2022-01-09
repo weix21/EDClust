@@ -94,7 +94,7 @@ Baseline_select <- function(count_all_notna, subject_all_notna, Ncluster){
     
     #Y = process_Y(count, thre = 2)
     
-    Fscores <- rep(0, N)
+    Fscores <- rep(0, 3)
     
     for(j in 1:3){
       invisible(capture.output(SLabel <- SHARP(data, N.cluster = Ncluster)))
