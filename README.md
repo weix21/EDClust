@@ -57,9 +57,18 @@ If you plan to update `EDClust` to newest version, after updating, please also s
 julia <- setup_julia(Update = TRUE) 
 ```
 
-## Quick start
+## Feature selection
 
-Here we show the key steps for parameter initialization and clustering.
+A newly developed feature selection tool, [FEAST](https://github.com/suke18/FEAST), shows superior performance in substantial real data analyses. FEAST is embedded in EDClust for feature selection. 
+
+```{r feature_selection, message=FALSE, warning=FALSE}
+data <- FEAST_select(count, subject, Ncluster = 6, Nfeature = 500)
+```
+FEAST bascially provides two functions for feature selection: FEAST() and FEAST_fast(), and FEAST_select() inherits most of their arguments. For extreme large dataset (sample size >5000), FEAST_fast() will be automatically applied. In our real data analyses, we could obtain satisfactory results with only 500 features, and thus by Nfeature = 500 by default.
+
+## Example in Mlung_sub Dataset step-by-step
+
+Here we show the key steps for baseline selection, parameter initialization and clustering.
 This code chunk assumes you have a pre-processed expression count matrix called count_all_notna, an array of subject ID information called subject_all_notna.
 
 Here's we show an example in Mlung_sub dataset step by step.
@@ -73,14 +82,22 @@ julia <- setup_julia()
 ## julia <- setup_julia(path = "the folder that contains Julia binary") 
 ```
 
-### (2) Initialize parameters
+### (2) Baseline selection
 
 ```{r quick_start, eval = FALSE}
 data("Mlung_sub")
+Baseline_select <- function(count_all_notna, subject_all_notna, Ncluster = 6)
+## We found subject 2 has the greatest score 
+## And thus we use subject 2 as the baseline subject for parameter initialization.
+```
+
+### (3) Initialize parameters
+
+```{r quick_start, eval = FALSE}
 alpha_0 <- InitVal_S(count_all_notna, subject_all_notna, Ncluster = 6, ID = 2, seed = 2345) 
 ```
 
-### (3) Clustering
+### (4) Clustering
 
 ```{r quick_start, eval = FALSE}
 result <- FitPolya(count_all_notna, subject_all_notna, alpha_0, BaseID=2L)
