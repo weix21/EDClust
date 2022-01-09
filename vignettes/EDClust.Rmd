@@ -201,7 +201,7 @@ result <- FitPolya(count_all_notna, subject_all_notna, alpha_0, BaseID = 2L)
 Based on the clustering results, we can benchmark the performance of EDClust by ARI. 
 And The t-SNE plot can also be shown as: 
   
-  ```{r ARI, eval = FALSE}
+```{r ARI, eval = FALSE}
 library(mclust)
 adjustedRandIndex(result$mem, annot_all_notna)
 ```
