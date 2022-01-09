@@ -19,6 +19,94 @@ NormalizeSC <- function(X) {
 }
 
 
+#' Feature selection by FEAST
+#'
+#' This function serves for feature selection based on FEAST
+#'
+#' @param count_all_notna a count expression matrix.
+#' @param subject_all_notna a subject ID array.
+#' @param Ncluster the number of input clusters.
+#' @param Nfeature the number of features selected.
+#' @param thre the threshold of minimum number of cells expressing a certain gene.
+#' @param FAST boolean. If T, using FEAST_fast() for feature selection. For extreme large dataset (sample size >5000), FEAST_fast() will be automatically applied.
+#' @param num_pcs the number of top pcs that will be investigated through the consensus clustering embedded in FEAST.
+#' @param dim_reduce dimension reduction methods chosen from pca, svd, or irlba.
+#' @param split boolean. If T, using subsampling to calculate the gene-level significance.
+#' @param batch_size when split is true, need to claim the batch size for spliting the cells.
+#'
+#' @return A list containing the processed count matrix, subject ID array, the index of filtered cells, and the rankings of the gene-significance.
+#' @export
+#' @import FEAST
+#' 
+#' @examples
+#'
+#' data<- FEAST_select(count, subject, Ncluster = 6)
+#' data <- FEAST_select(count, subject, Ncluster = 6, dim_reduce = "irlba")
+#' data <- FEAST_select(count, subject, Ncluster = 6, Nfeature = 1000, FAST = TRUE)
+#'
+#'
+FEAST_select <- function(count_all_notna, subject_all_notna, Ncluster, Nfeature = 500, thre = 2,
+                         FAST = FALSE, num_pcs = 10, dim_reduce = c("pca", "svd", "irlba"), split = FALSE, batch_size = 1000) {
+  Y <- process_Y(count_all_notna, thre)
+  if(FAST == TRUE | ncol(Y) > 5000){
+    ixs <- FEAST_fast(Y, k = Ncluster, num_pcs, split, batch_size)
+  }
+  else{
+    ixs <- FEAST(Y, k = Ncluster, num_pcs, dim_reduce, split, batch_size)
+  }
+  Y <- Y[head(ixs, Nfeature),]
+  index <- which(colSums(Y)==0)
+  count <- Y[, which(colSums(Y)>0)]
+  subject_all_notna <- subject_all_notna[which(colSums(Y)>0)]
+  return(list(count = count, subject = subject_all_notna, filtered_index = index, ixs = ixs))
+}
+
+
+#' Baseline subject selection 
+#'
+#' This function serves for selecting the baseline subject
+#'
+#' @param count_all_notna a count expression matrix.
+#' @param subject_all_notna a subject ID array.
+#' @param Ncluster the number of input clusters.
+#'
+#' @return A list containing the ID of best potential baseline and each subject' score.
+#' The one with highest score will be selected as the baseline subject.
+#'  
+#' @export
+#' @import FEAST
+#' @import SHARP
+#' 
+#' @examples
+#'
+#' baseID <- Baseline_select(count, subject, Ncluster = 6)
+#'
+#'
+
+Baseline_select <- function(count_all_notna, subject_all_notna, Ncluster){
+  nInd <- length(unique(subject_all_notna))
+  evalRes <- rep(0, nInd)
+  for(i in 1:nInd){
+    count <- count_all_notna[, which(subject_all_notna == levels(factor(subject_all_notna))[i])]
+    
+    data <- NormalizeSC(count)
+    data <- log2(data$normdata + 1)
+    
+    #Y = process_Y(count, thre = 2)
+    
+    Fscores <- rep(0, N)
+    
+    for(j in 1:3){
+      invisible(capture.output(SLabel <- SHARP(data, N.cluster = Ncluster)))
+      Fscores[j] <- mean(na.omit((cal_F2(count, SLabel$pred_clusters)$F_scores)))
+    }
+    
+    evalRes[i] <- mean(Fscores)
+  }
+  return(list(baseline = levels(factor(subject_all_notna))[which.max(evalRes)], score = evalRes))
+} 
+
+
 
 #' Compute initial value
 #'
@@ -105,72 +193,6 @@ InitVal_S <- function(count_all_notna, subject_all_notna, Ncluster = NULL, ID = 
   alpha_0 <- InitVal(count, SLabel$pred_clusters, subjectid)$alpha[[1]]
   return(alpha_0)
 }
-
-#' Run Liger for initial cluster
-#'
-#' @param countlist a list containing a count expression matrix.
-#' @param Ncluster number of clusters for the final clustering results.
-#' @param seed a number used for setting seeds for SHARP to obtain reproducible results.
-#'
-#' @return An array contains the initial cluster based on Liger, which is used for InitVal_L().
-#' @import rliger
-#'
-#' @examples
-#'
-#' liger_clusters <- Run_Liger(count_all_notna, Ncluster = 5)
-#'
-#' liger_clusters <- Run_Liger(count_all_notna, Ncluster = 5, seed = 2345)
-#'
-#'
-Run_Liger <- function(countlist, Ncluster, seed = 1234) {
- 
-  ifnb_liger <- createLiger(countlist)
-  ifnb_liger <- normalize(ifnb_liger)
-  ifnb_liger <- selectGenes(ifnb_liger)
-  ifnb_liger <- scaleNotCenter(ifnb_liger)
-  ifnb_liger <- optimizeALS(ifnb_liger, k = Ncluster, rand.seed = seed)
-  ifnb_liger <- quantile_norm(ifnb_liger, rand.seed = seed)
-  liger_clusters <- ifnb_liger@clusters
-
-  return(liger_clusters)
-}
-
-#' Run Liger for initial value
-#'
-#' @param count_all_notna a count expression matrix.
-#' @param subject_all_notna a subject ID array.
-#' @param Ncluster number of clusters for the final clustering results.
-#' @param ID baseline subject ID number.
-#' @param seed a number used for setting seeds for SHARP to obtain reproducible results.
-#'
-#' @return An array containing the initial value of cell-type effect based on baseline subject.
-#' @export
-#' @import rliger
-#'
-#' @examples
-#'
-#' alpha_0 <- InitVal_L(count_all_notna, subject_all_notna, Ncluster = 5)
-#'
-#' alpha_0 <- InitVal_L(count_all_notna, subject_all_notna, Ncluster = 5, ID = 3, seed = 2345)
-#'
-#'
-InitVal_L <- function(count_all_notna, subject_all_notna, Ncluster, ID = 1, seed = 1234) {
-  countlist <- list()
-  NSubject <- length(unique(subject_all_notna))
-  for(i in 1:NSubject) {
-    countlist[[i]] <- count_all_notna[, which(subject_all_notna == levels(factor(subject_all_notna))[i])]
-  }
-  subjectid <- subject_all_notna[which(subject_all_notna == levels(factor(subject_all_notna))[ID])]
-  names(countlist) <- 1:NSubject
-  
-  invisible(capture.output(liger_clusters <- Run_Liger(countlist, Ncluster, seed)))
-  
-  liger_clusters <- liger_clusters[which(subject_all_notna == levels(factor(subject_all_notna))[ID])]
-  
-  alpha_0 <- InitVal(countlist[[ID]], liger_clusters, subjectid)$alpha[[1]]
-  return(alpha_0)
-}
-
 
 
 #' Run EDClust for single-cell RNA data clustering
