@@ -46,7 +46,7 @@ This function serves for feature selection based on FEAST
 }
 \examples{
 
-data<- FEAST_select(count, subject, Ncluster = 6)
+data <- FEAST_select(count, subject, Ncluster = 6)
 data <- FEAST_select(count, subject, Ncluster = 6, dim_reduce = "irlba")
 data <- FEAST_select(count, subject, Ncluster = 6, Nfeature = 1000, FAST = TRUE)
 
