@@ -64,7 +64,7 @@ A newly developed feature selection tool, [FEAST](https://github.com/suke18/FEAS
 ```{r feature_selection, message=FALSE, warning=FALSE}
 data <- FEAST_select(count, subject, Ncluster = 6, Nfeature = 500)
 ```
-FEAST bascially provides two functions for feature selection: FEAST() and FEAST_fast(), and FEAST_select() inherits most of their arguments. For extreme large dataset (sample size >5000), FEAST_fast() will be automatically applied. In our real data analyses, we could obtain satisfactory results with only 500 features, and thus by Nfeature = 500 by default.
+FEAST bascially provides two functions for feature selection: FEAST() and FEAST_fast(), and FEAST_select() inherits most of their arguments. For extreme large dataset (sample size >5000), FEAST_fast() will be automatically applied. In our real data analyses, we could obtain satisfactory results with only 500 features, and thus we use Nfeature = 500 by default.
 
 ## Example in Mlung_sub Dataset step-by-step
 
