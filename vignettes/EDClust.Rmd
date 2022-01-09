@@ -2,22 +2,22 @@
 title: "**Cluster multiple-subject scRNA-seq data with EDClust**"
 shorttitle: "EDClust guide"
 author:
-  - name: Xin Wei
-email: xin.wei@emory.edu
+- name: Xin Wei
+  email: xin.wei@emory.edu
 - name: Hao Wu
-email: hao.wu@emory.edu
+  email: hao.wu@emory.edu
 package: EDClust
 abstract: >
   This vignette introduces the usage of the 
-R package EDClust (EM-MM hybrid method for cell clustering). 
-It is designed for scRNA-seq cell clustering when data are from multiple subjects.
-EDClust offers functions for predicting cell type labels, 
-estimating parameters of effects from different sources, 
-and posterior probabilities for cells being in each cluster.
-EDClust is based on a rigorous staitstical framework, 
-and utilizes EDClust.jl for its core routines to 
-achieve a reasonable computational performance of clustering directly in R.
-
+  R package EDClust (EM-MM hybrid method for cell clustering). 
+  It is designed for scRNA-seq cell clustering when data are from multiple subjects.
+  EDClust offers functions for predicting cell type labels, 
+  estimating parameters of effects from different sources, 
+  and posterior probabilities for cells being in each cluster.
+  EDClust is based on a rigorous staitstical framework, 
+  and utilizes EDClust.jl for its core routines to 
+  achieve a reasonable computational performance of clustering directly in R.
+  
 
 vignette: >
   %\VignetteIndexEntry{The EDClust User's Guide}
@@ -200,7 +200,7 @@ result <- FitPolya(count_all_notna, subject_all_notna, alpha_0, BaseID = 2L)
 
 Based on the clustering results, we can benchmark the performance of EDClust by ARI. 
 And The t-SNE plot can also be shown as: 
-  
+
 ```{r ARI, eval = FALSE}
 library(mclust)
 adjustedRandIndex(result$mem, annot_all_notna)
@@ -214,3 +214,4 @@ include_graphics("TSNE.jpg")
 ```{r}
 sessionInfo()
 ```
+
