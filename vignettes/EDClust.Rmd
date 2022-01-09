@@ -1,5 +1,5 @@
 ---
-  title: "**Cluster multiple-subject scRNA-seq data with EDClust**"
+title: "**Cluster multiple-subject scRNA-seq data with EDClust**"
 shorttitle: "EDClust guide"
 author:
   - name: Xin Wei
