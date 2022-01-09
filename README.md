@@ -86,7 +86,7 @@ julia <- setup_julia()
 
 ```{r quick_start, eval = FALSE}
 data("Mlung_sub")
-Baseline_select <- function(count_all_notna, subject_all_notna, Ncluster = 6)
+baseID <- Baseline_select(count_all_notna, subject_all_notna, Ncluster = 6)
 ## We found subject 2 has the greatest score 
 ## And thus we use subject 2 as the baseline subject for parameter initialization.
 ```
