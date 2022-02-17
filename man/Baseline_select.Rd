@@ -4,7 +4,7 @@
 \alias{Baseline_select}
 \title{Baseline subject selection}
 \usage{
-Baseline_select(count_all_notna, subject_all_notna, Ncluster)
+Baseline_select(count_all_notna, subject_all_notna, Ncluster, cores = 1)
 }
 \arguments{
 \item{count_all_notna}{a count expression matrix.}
@@ -12,6 +12,8 @@ Baseline_select(count_all_notna, subject_all_notna, Ncluster)
 \item{subject_all_notna}{a subject ID array.}
 
 \item{Ncluster}{the number of input clusters.}
+
+\item{cores}{number of cores to be used.}
 }
 \value{
 A list containing the ID of best potential baseline and each subject' score.

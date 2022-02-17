@@ -69,6 +69,7 @@ FEAST_select <- function(count_all_notna, subject_all_notna, Ncluster, Nfeature 
 #' @param count_all_notna a count expression matrix.
 #' @param subject_all_notna a subject ID array.
 #' @param Ncluster the number of input clusters.
+#' @param cores number of cores to be used.
 #'
 #' @return A list containing the ID of best potential baseline and each subject' score.
 #' The one with highest score will be selected as the baseline subject.
@@ -83,7 +84,7 @@ FEAST_select <- function(count_all_notna, subject_all_notna, Ncluster, Nfeature 
 #'
 #'
 
-Baseline_select <- function(count_all_notna, subject_all_notna, Ncluster){
+Baseline_select <- function(count_all_notna, subject_all_notna, Ncluster, cores = 1 ){
   nInd <- length(unique(subject_all_notna))
   evalRes <- rep(0, nInd)
   for(i in 1:nInd){
@@ -97,7 +98,7 @@ Baseline_select <- function(count_all_notna, subject_all_notna, Ncluster){
     Fscores <- rep(0, 3)
     
     for(j in 1:3){
-      invisible(capture.output(SLabel <- SHARP(data, N.cluster = Ncluster)))
+      invisible(capture.output(SLabel <- SHARP(data, N.cluster = Ncluster, n.cores = cores)))
       Fscores[j] <- mean(na.omit((cal_F2(count, SLabel$pred_clusters)$F_scores)))
     }
     
@@ -169,6 +170,7 @@ InitVal <- function(Y, celltype, subjectid) {
 #' @param Ncluster number of clusters for the final clustering results.
 #' @param ID baseline subject ID number.
 #' @param seed a number used for setting seeds for SHARP to obtain reproducible results.
+#' @param cores number of cores to be used.
 #'
 #' @return An array containing the initial value of cell-type effect based on baseline subject.
 #' @export
@@ -181,14 +183,14 @@ InitVal <- function(Y, celltype, subjectid) {
 #' alpha_0 <- InitVal_S(count_all_notna, subject_all_notna, Ncluster = 5, ID = 3)
 #'
 #'
-InitVal_S <- function(count_all_notna, subject_all_notna, Ncluster = NULL, ID = 1, seed = 1234) {
+InitVal_S <- function(count_all_notna, subject_all_notna, Ncluster = NULL, ID = 1, seed = 1234, cores = 1) {
   count <- count_all_notna[, which(subject_all_notna == levels(factor(subject_all_notna))[ID])]
   subjectid <- subject_all_notna[which(subject_all_notna == levels(factor(subject_all_notna))[ID])]
 
   data <- NormalizeSC(count)
   data <- log2(data$normdata + 1)
 
-  invisible(capture.output(SLabel <- SHARP(data, N.cluster = Ncluster, rN.seed = seed)))
+  invisible(capture.output(SLabel <- SHARP(data, N.cluster = Ncluster, rN.seed = seed, n.cores = cores)))
 
   alpha_0 <- InitVal(count, SLabel$pred_clusters, subjectid)$alpha[[1]]
   return(alpha_0)

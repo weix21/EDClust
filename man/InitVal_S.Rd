@@ -9,7 +9,8 @@ InitVal_S(
   subject_all_notna,
   Ncluster = NULL,
   ID = 1,
-  seed = 1234
+  seed = 1234,
+  cores = 1
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ InitVal_S(
 \item{ID}{baseline subject ID number.}
 
 \item{seed}{a number used for setting seeds for SHARP to obtain reproducible results.}
+
+\item{cores}{number of cores to be used.}
 }
 \value{
 An array containing the initial value of cell-type effect based on baseline subject.
