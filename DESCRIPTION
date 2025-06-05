@@ -14,7 +14,8 @@ Imports:
     SHARP,
     FEAST
 Remotes:
-    shibiaowan/SHARP
+    shibiaowan/SHARP,
+    suke18/FEAST
 Suggests: 
     rmarkdown,
     mclust,
