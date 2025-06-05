@@ -13,6 +13,8 @@ Imports:
     JuliaCall,
     SHARP,
     FEAST
+Remotes:
+    shibiaowan/SHARP
 Suggests: 
     rmarkdown,
     mclust,
